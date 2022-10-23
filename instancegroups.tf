@@ -2,7 +2,10 @@ resource "google_compute_instance_group" "webservers" {
   name        = "webservers"
   description = "Terraform Web servers"
   zone        = "europe-north1-a"
-  instances   = [google_compute_instance.web-server.self_link]
+  instances = [
+    google_compute_instance.web-server.self_link,
+    google_compute_instance.web-server2.self_link
+  ]
 
   named_port {
     name = "http"
