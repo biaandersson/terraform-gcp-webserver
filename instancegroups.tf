@@ -18,8 +18,8 @@ resource "google_compute_health_check" "webserver-health-check" {
   healthy_threshold   = 1
   unhealthy_threshold = 2
 
-  tcp_health_check {
-    port = "http"
+  http_health_check {
+    port = 8080
   }
 
   depends_on = [
@@ -64,7 +64,6 @@ resource "google_compute_global_forwarding_rule" "webserver-loadbalancer" {
   ip_protocol           = "TCP"
   port_range            = "80"
   load_balancing_scheme = "EXTERNAL"
-  network_tier          = "STANDARD"
   target                = google_compute_target_http_proxy.default.self_link
 }
 
